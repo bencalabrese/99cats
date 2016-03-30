@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :redirect_if_logged_in, only: [:new, :create]
+
   def new
     @user = User.new
     render :new
@@ -19,6 +21,12 @@ class SessionsController < ApplicationController
       flash.now[:errors] = ["Invalid login credentials"]
       render :new
     end
+  end
+
+  def destroy
+    current_user.reset_session_token! if current_user
+    session[:session_token] = nil
+    redirect_to new_session_url
   end
 
   private
