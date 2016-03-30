@@ -19,7 +19,8 @@ class User < ActiveRecord::Base
   after_initialize :ensure_session_token
 
   def self.find_by_credentials(user_name, password)
-    user = self.where(user_name: user_name).first
+    user = self.find_by_user_name(user_name)
+    return nil if user.nil?
     user.is_password?(password) ? user : nil
   end
 
