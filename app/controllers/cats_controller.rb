@@ -8,6 +8,7 @@ class CatsController < ApplicationController
 
   def show
     @cat = Cat.find(params[:id])
+    @requests = @cat.rental_requests.includes(:requester).order("start_date")
     render :show
   end
 
