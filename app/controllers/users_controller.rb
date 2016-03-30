@@ -6,7 +6,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    # fail
     if @user.save
       redirect_to cats_url# TODO add view later
     else
