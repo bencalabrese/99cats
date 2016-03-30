@@ -1,5 +1,5 @@
 class CatRentalRequestsController < ApplicationController
-  before_action :only_owner_can_approve_or_deny_request, only: [:approve, :deny]
+  # before_action :only_owner_can_approve_or_deny_request, only: [:approve, :deny]
 
   def approve
     current_cat_rental_request.approve!
@@ -42,7 +42,7 @@ class CatRentalRequestsController < ApplicationController
   end
 
   def only_owner_can_approve_or_deny_request
-    unless owned_cat?
+    unless owned_cat?(current_cat.id)
       redirect_to :back
     end
   end

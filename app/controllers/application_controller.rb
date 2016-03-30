@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
     redirect_to cats_url if current_user
   end
 
-  def owned_cat?
-    !current_user.cats.find_by_id(params[:id]).nil?
+  def owned_cat?(cat_id)
+    !current_user.cats.find_by_id(cat_id).nil?
   end
 end

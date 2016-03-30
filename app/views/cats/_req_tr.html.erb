@@ -3,7 +3,7 @@
   <td><%= req.end_date %></td>
   <td><%= req.requester.user_name %></td>
   <td>
-    <% if req.pending? && owned_cat? %>
+    <% if req.pending? && owned_cat?(@cat.id) %>
         <%= button_to "Approve", approve_cat_rental_request_url(req) %>
         <%= button_to "Deny", deny_cat_rental_request_url(req) %>
     <% else %>

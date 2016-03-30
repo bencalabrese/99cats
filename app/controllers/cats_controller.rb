@@ -51,7 +51,7 @@ class CatsController < ApplicationController
   end
 
   def only_edit_owned_cat
-    unless owned_cat?
+    unless owned_cat?(params[:id])
       redirect_to :back
     end
   end
