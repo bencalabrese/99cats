@@ -6,9 +6,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
+    # fail
     if @user.save
-      redirect_to # TODO add view later
+      redirect_to cats_url# TODO add view later
     else
       flash.now[:errors] = @user.errors.full_messages
       render :new

@@ -1,0 +1,29 @@
+<h1>Sign up!</h1>
+
+
+<% if flash[:errors] %>
+  <ul>
+    <%flash[:errors].each do |error| %>
+    <li><%= error %></li>
+    <% end %>
+  </ul>
+<%end%>
+
+<form action="<%= users_url %>" method="post">
+  <label for="user_name">Username</label>
+  <input name="user[user_name]"
+         type="text"
+         id="user_name"
+         value="<%= @user.user_name %>">
+
+  </br>
+
+  <label for="password">Password</label>
+  <input name="user[password]"
+         type="password"
+         id="password"
+         value="<%= @user.password %>">
+
+  </br>
+  <input type="submit" value="Create Account">
+</form>
