@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   attr_reader :password
 
   has_many :cats
+  has_many :requests, class_name: :CatRentalRequest
 
   validates :user_name, :password_digest, :session_token,
     presence: true, uniqueness: true
