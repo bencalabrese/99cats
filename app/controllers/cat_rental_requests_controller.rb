@@ -1,5 +1,6 @@
 class CatRentalRequestsController < ApplicationController
-  # before_action :only_owner_can_approve_or_deny_request, only: [:approve, :deny]
+  before_action :only_owner_can_approve_or_deny_request, only: [:approve, :deny]
+  before_action :require_login
 
   def approve
     current_cat_rental_request.approve!

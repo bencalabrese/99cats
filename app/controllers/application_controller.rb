@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   def login!(user)
     @current_user = user
-    @current_session = Session.create!(user_id: @user.id)
+    @current_session = Session.create!(user_id: @user.id, browser: browser)
     session[:session_token] = current_session.session_token
   end
 
@@ -29,5 +29,17 @@ class ApplicationController < ActionController::Base
 
   def owned_cat?(cat_id)
     !current_user.cats.find_by_id(cat_id).nil?
+  end
+
+  def require_login
+    redirect_to new_session_url unless current_user
+  end
+
+  def browser
+    result = request.env["HTTP_USER_AGENT"]
+
+    %w(Chrome Safari Firefox Opera).each do |browser|
+      return browser if result.include?(browser)
+    end
   end
 end

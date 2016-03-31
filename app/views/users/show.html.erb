@@ -3,6 +3,8 @@
 <h3>Logged in from:</h3>
 <ul>
   <% @user.sessions.each do |session| %>
-    <li><%= session.session_token %><%= button_to "delete", delete_session_path(session) %></li>
+    <li><%= session.browser %><%= button_to "delete",
+            delete_session_path(session),
+            method: :delete %></li>
   <% end %>
 </ul>

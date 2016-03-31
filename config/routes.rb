@@ -9,7 +9,7 @@ NinetyNineCatsDay1::Application.routes.draw do
 
   resource :session, only: [:new, :create, :destroy]
 
-  post "session/:id", to: "sessions#delete_session", as: "delete_session"
+  delete "session/:id", to: "sessions#delete_session", as: "delete_session"
 
   root to: redirect("/cats")
 end
