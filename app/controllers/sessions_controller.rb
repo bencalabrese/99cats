@@ -13,7 +13,6 @@ class SessionsController < ApplicationController
     )
 
     if @user
-      @user.reset_session_token!
       login!(@user)
       redirect_to cats_url
     else
@@ -24,7 +23,9 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    current_user.reset_session_token! if current_user
+    if current_user
+      Session.find_by_session_token(session[:session_token]).destroy
+    end
     session[:session_token] = nil
     redirect_to new_session_url
   end

@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
 
   def login!(user)
     @current_user = user
-    session[:session_token] = user.session_token
+    @current_session = Session.create!(user_id: @user.id)
+    session[:session_token] = current_session.session_token
   end
 
   def login_user!(user)
@@ -15,7 +16,11 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @current_user ||= User.find_by_session_token(session[:session_token])
+    @current_user ||= current_session ? current_session.user : nil
+  end
+
+  def current_session
+    @current_session ||= Session.find_by_session_token(session[:session_token])
   end
 
   def redirect_if_logged_in
