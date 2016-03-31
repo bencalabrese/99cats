@@ -30,6 +30,15 @@ class SessionsController < ApplicationController
     redirect_to new_session_url
   end
 
+  def delete_session
+    Session.find(params[:id]).destroy
+    if current_user
+      redirect_to user_url(current_user.id)
+    else
+      redirect_to new_session_url
+    end
+  end
+
   private
   def session_params
     params.require(:session).permit(:user_name,:password)

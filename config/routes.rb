@@ -5,8 +5,11 @@ NinetyNineCatsDay1::Application.routes.draw do
     post "deny", on: :member
   end
 
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :show]
+
   resource :session, only: [:new, :create, :destroy]
+
+  post "session/:id", to: "sessions#delete_session", as: "delete_session"
 
   root to: redirect("/cats")
 end

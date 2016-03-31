@@ -16,6 +16,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @user = current_user
+    render :show
+  end
 
   private
   def user_params
